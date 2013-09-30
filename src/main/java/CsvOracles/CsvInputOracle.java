@@ -1,3 +1,6 @@
+package CsvOracles;
+
+import CsvOracles.params.CsvInputOracleParams;
 import eu.cloudtm.autonomicManager.commons.EvaluatedParam;
 import eu.cloudtm.autonomicManager.commons.ForecastParam;
 import eu.cloudtm.autonomicManager.commons.Param;
@@ -5,17 +8,70 @@ import eu.cloudtm.autonomicManager.commons.ReplicationProtocol;
 import eu.cloudtm.autonomicManager.oracles.InputOracle;
 import parse.common.CsvParser;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Set;
+
 /**
  * @author Diego Didona, didona@gsd.inesc-id.pt
  *         Date: 30/09/13
  */
-public abstract class CsvInputOracle<C extends CsvParser> implements InputOracle {
+public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOracleParams> implements InputOracle {
 
 
    protected C csvParser;
+   private HashMap<ForecastParam, Object> fMap = new HashMap<ForecastParam, Object>();
+   private HashMap<EvaluatedParam, Object> eMap = new HashMap<EvaluatedParam, Object>();
+   private HashMap<Param, Object> pMap = new HashMap<Param, Object>();
+
+   protected CsvInputOracle(P param) throws IOException {
+      csvParser = _buildCsvParser(param);
+      initHash();
+   }
+
+   public void setParam(Param p, Object o) {
+      this.pMap.put(p, o);
+   }
+
+   public void setEvaluatedParam(EvaluatedParam e, Object o) {
+      this.eMap.put(e, o);
+   }
+
+   public void setForecastParam(ForecastParam f, Object o) {
+      this.fMap.put(f, o);
+   }
+
+   private void initHash() {
+      Set<Param> p = CsvOracleHelper.csvParams();
+      Set<ForecastParam> f = CsvOracleHelper.csvForecastParams();
+      Set<EvaluatedParam> e = CsvOracleHelper.csvEvaluatedParams();
+      for (Param pp : p) {
+         pMap.put(pp, _getParam(pp));
+      }
+      for (EvaluatedParam ee : e) {
+         eMap.put(ee, _getEvaluatedParam(ee));
+      }
+      for (ForecastParam ff : f) {
+         fMap.put(ff, _getForecastParam(ff));
+      }
+   }
 
    @Override
-   public Object getParam(Param param) {
+   public Object getParam(Param p) {
+      return this.pMap.get(p);
+   }
+
+   @Override
+   public Object getEvaluatedParam(EvaluatedParam evaluatedParam) {
+      return this.eMap.get(evaluatedParam);
+   }
+
+   @Override
+   public Object getForecastParam(ForecastParam forecastParam) {
+      return this.fMap.get(forecastParam);
+   }
+
+   public Object _getParam(Param param) {
       switch (param) {
          case NumNodes:
             return (long) numNodes();
@@ -81,8 +137,7 @@ public abstract class CsvInputOracle<C extends CsvParser> implements InputOracle
 
    }
 
-   @Override
-   public Object getEvaluatedParam(EvaluatedParam evaluatedParam) {
+   public Object _getEvaluatedParam(EvaluatedParam evaluatedParam) {
       switch (evaluatedParam) {
          case MAX_ACTIVE_THREADS:
             return (int) numThreadsPerNode();
@@ -95,8 +150,7 @@ public abstract class CsvInputOracle<C extends CsvParser> implements InputOracle
       }
    }
 
-   @Override
-   public Object getForecastParam(ForecastParam forecastParam) {
+   public Object _getForecastParam(ForecastParam forecastParam) {
       switch (forecastParam) {
          case ReplicationProtocol:
             return replicationProtocol();
@@ -234,6 +288,8 @@ public abstract class CsvInputOracle<C extends CsvParser> implements InputOracle
    private double avgClusteredGetCommandReplySize() {
       return csvParser.getAvgParam("AvgClusteredGetCommandReplySize");
    }
+
+   protected abstract C _buildCsvParser(P param) throws IOException;
 
 
 }

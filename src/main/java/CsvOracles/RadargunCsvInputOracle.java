@@ -1,3 +1,6 @@
+package CsvOracles;
+
+import CsvOracles.params.CsvRgParams;
 import eu.cloudtm.autonomicManager.commons.ReplicationProtocol;
 import parse.radargun.Ispn5_2CsvParser;
 
@@ -7,10 +10,15 @@ import java.io.IOException;
  * @author Diego Didona, didona@gsd.inesc-id.pt
  *         Date: 30/09/13
  */
-public class RadargunCsvInputOracle extends CsvInputOracle<Ispn5_2CsvParser> {
+public class RadargunCsvInputOracle extends CsvInputOracle<Ispn5_2CsvParser, CsvRgParams> {
 
-   public RadargunCsvInputOracle(String path) throws IOException {
-      this.csvParser = new Ispn5_2CsvParser(path);
+   public RadargunCsvInputOracle(CsvRgParams param) throws IOException {
+      super(param);
+   }
+
+   @Override
+   protected Ispn5_2CsvParser _buildCsvParser(CsvRgParams param) throws IOException {
+      return new Ispn5_2CsvParser(param.getPath());
    }
 
    @Override

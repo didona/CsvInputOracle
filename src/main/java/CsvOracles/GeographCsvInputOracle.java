@@ -1,6 +1,8 @@
+package CsvOracles;
+
+import CsvOracles.params.CsvGeoParams;
 import eu.cloudtm.autonomicManager.commons.ReplicationProtocol;
 import parse.geograph.GeographCsvParser;
-import parse.timestamp.CsvTimestamp;
 
 import java.io.IOException;
 
@@ -8,10 +10,15 @@ import java.io.IOException;
  * @author Diego Didona, didona@gsd.inesc-id.pt
  *         Date: 30/09/13
  */
-public class GeographCsvInputOracle extends CsvInputOracle<GeographCsvParser> {
+public class GeographCsvInputOracle extends CsvInputOracle<GeographCsvParser, CsvGeoParams> {
 
-   public GeographCsvInputOracle(String path, CsvTimestamp init, CsvTimestamp end) throws IOException {
-      this.csvParser = new GeographCsvParser(path, init, end);
+   public GeographCsvInputOracle(CsvGeoParams param) throws IOException {
+      super(param);
+   }
+
+   @Override
+   protected GeographCsvParser _buildCsvParser(CsvGeoParams param) throws IOException {
+     return new GeographCsvParser(param.getPath(), param.getInit(), param.getEnd());
    }
 
    @Override
