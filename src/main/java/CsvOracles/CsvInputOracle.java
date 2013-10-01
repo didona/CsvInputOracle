@@ -71,7 +71,7 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
       return this.fMap.get(forecastParam);
    }
 
-   public Object _getParam(Param param) {
+   private Object _getParam(Param param) {
       switch (param) {
          case NumNodes:
             return (long) numNodes();
@@ -137,7 +137,7 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
 
    }
 
-   public Object _getEvaluatedParam(EvaluatedParam evaluatedParam) {
+   private Object _getEvaluatedParam(EvaluatedParam evaluatedParam) {
       switch (evaluatedParam) {
          case MAX_ACTIVE_THREADS:
             return (int) numThreadsPerNode();
@@ -150,7 +150,7 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
       }
    }
 
-   public Object _getForecastParam(ForecastParam forecastParam) {
+   private Object _getForecastParam(ForecastParam forecastParam) {
       switch (forecastParam) {
          case ReplicationProtocol:
             return replicationProtocol();
