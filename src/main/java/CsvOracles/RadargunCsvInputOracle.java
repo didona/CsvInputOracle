@@ -1,14 +1,12 @@
 package CsvOracles;
 
 import CsvOracles.params.CsvRgParams;
-import eu.cloudtm.autonomicManager.commons.ReplicationProtocol;
 import parse.radargun.Ispn5_2CsvParser;
 
 import java.io.IOException;
 
 /**
- * @author Diego Didona, didona@gsd.inesc-id.pt
- *         Date: 30/09/13
+ * @author Diego Didona, didona@gsd.inesc-id.pt Date: 30/09/13
  */
 public class RadargunCsvInputOracle extends CsvInputOracle<Ispn5_2CsvParser, CsvRgParams> {
 
@@ -37,12 +35,12 @@ public class RadargunCsvInputOracle extends CsvInputOracle<Ispn5_2CsvParser, Csv
    protected double numberOfEntries() {
       return csvParser.numKeys();
    }
-
+   /*
    protected ReplicationProtocol replicationProtocol() {
       if (csvParser.getReplicationProtocol().equals("2PC"))
          return ReplicationProtocol.TWOPC;
-
       return ReplicationProtocol.valueOf(csvParser.getReplicationProtocol());
    }
+   */
 
 }

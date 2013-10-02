@@ -41,7 +41,5 @@ public class GeographCsvInputOracle extends CsvInputOracle<GeographCsvParser, Cs
       return csvParser.getAvgParam("NumberOfEntries");
    }
 
-   protected ReplicationProtocol replicationProtocol() {
-      throw new RuntimeException("TBI");
-   }
+
 }

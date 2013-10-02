@@ -13,10 +13,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * @author Diego Didona, didona@gsd.inesc-id.pt
- *         Date: 30/09/13
+ * @author Diego Didona, didona@gsd.inesc-id.pt Date: 30/09/13
  */
 public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOracleParams> implements InputOracle {
+
+   private static final int TPC = 0, PB = 1, TO = 2;
 
 
    protected C csvParser;
@@ -118,8 +119,6 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
             return (long) avgLocalGetTime();
          case LocalUpdateTxPrepareResponseTime:
             return (long) localUpdateTxPrepareResponseTime();
-         case LocalUpdateTxLocalResponseTime:
-            return (long) LocalUpdateTxLocalResponseTime();
          case AverageWriteTime:
             return (long) AverageWriteTime();
          //these are not present in csvfile
@@ -195,7 +194,16 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
       return 2;
    }
 
-   protected abstract ReplicationProtocol replicationProtocol();
+   protected ReplicationProtocol replicationProtocol() {
+      double rp = csvParser.getAvgParam("CurrentProtocolAsInt");
+      if (rp == TPC)
+         return ReplicationProtocol.TWOPC;
+      if (rp == PB)
+         return ReplicationProtocol.PB;
+      if (rp == TO)
+         return ReplicationProtocol.TO;
+      throw new IllegalArgumentException("Replication protocol is " + rp + " !! " + TPC + " = TPC; " + PB + " = PB; " + TO + "+ = TO");
+   }
 
    private double getsPerRoXact() {
       return csvParser.getAvgParam("AvgGetsPerROTransaction");
@@ -256,7 +264,7 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
    protected abstract double avgTxArrivalRate();
 
    private double AvgNTCBTime() {
-      return 0D;
+      return csvParser.getAvgParam("AvgNTCBTime");
    }
 
    private double avgLocalGetTime() {
