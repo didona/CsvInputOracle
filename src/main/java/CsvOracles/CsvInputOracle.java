@@ -246,11 +246,11 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
    }
 
    private double remoteUpdateTxCommitServiceTime() {
-      return csvParser.getAvgParam("RemoteCommitCommandServiceTime");
+      return csvParser.getAvgParam("RemoteUpdateTxCommitServiceTime");
    }
 
    private double remoteUpateTxRollbackServiceTime() {
-      return csvParser.getAvgParam("RemoteRollbackServiceTime");
+      return csvParser.getAvgParam("RemoteUpdateTxRollbackServiceTime");
    }
 
    private double gmuClusterGetCommandServiceTime() {

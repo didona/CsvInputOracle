@@ -46,7 +46,7 @@ public class CsvOracleHelper {
       return s;
    }
 
-   public static Set<ForecastParam> csvForecastParams() {
+   static Set<ForecastParam> csvForecastParams() {
       Set<ForecastParam> s = new HashSet<ForecastParam>();
       s.add(ForecastParam.NumNodes);
       s.add(ForecastParam.ReplicationProtocol);
@@ -54,7 +54,7 @@ public class CsvOracleHelper {
       return s;
    }
 
-   public static Set<EvaluatedParam> csvEvaluatedParams() {
+   static Set<EvaluatedParam> csvEvaluatedParams() {
       Set<EvaluatedParam> s = new HashSet<EvaluatedParam>();
       s.add(EvaluatedParam.ACF);
       s.add(EvaluatedParam.CORE_PER_CPU);
