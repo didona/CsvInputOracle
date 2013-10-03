@@ -8,8 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author Diego Didona, didona@gsd.inesc-id.pt
- *         Date: 30/09/13
+ * @author Diego Didona, didona@gsd.inesc-id.pt Date: 30/09/13
  */
 public class CsvOracleHelper {
 
@@ -42,6 +41,7 @@ public class CsvOracleHelper {
       s.add(Param.AvgNTCBTime);
       s.add(Param.NumberOfEntries);
       s.add(Param.AvgClusteredGetCommandReplySize);
+      s.add(Param.AvgGetsPerWrTransaction);
 
       return s;
    }
