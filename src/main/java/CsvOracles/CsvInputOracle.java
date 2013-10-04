@@ -47,13 +47,13 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
       Set<ForecastParam> f = CsvOracleHelper.csvForecastParams();
       Set<EvaluatedParam> e = CsvOracleHelper.csvEvaluatedParams();
       for (Param pp : p) {
-         pMap.put(pp, _getParam(pp));
+         setParam(pp, _getParam(pp));
       }
       for (EvaluatedParam ee : e) {
-         eMap.put(ee, _getEvaluatedParam(ee));
+         setEvaluatedParam(ee, _getEvaluatedParam(ee));
       }
       for (ForecastParam ff : f) {
-         fMap.put(ff, _getForecastParam(ff));
+         setForecastParam(ff, _getForecastParam(ff));
       }
    }
 
@@ -205,39 +205,39 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
       throw new IllegalArgumentException("Replication protocol is " + rp + " !! " + TPC + " = TPC; " + PB + " = PB; " + TO + "+ = TO");
    }
 
-   private double getsPerRoXact() {
+   protected double getsPerRoXact() {
       return csvParser.getAvgParam("AvgGetsPerROTransaction");
    }
 
-   private double getsPerWrXact() {
+   protected double getsPerWrXact() {
       return csvParser.getAvgParam("AvgGetsPerWrTransaction");
    }
 
-   private double localUpdateTxLocalServiceTime() {
+   protected double localUpdateTxLocalServiceTime() {
       return csvParser.getAvgParam("LocalUpdateTxLocalServiceTime");
    }
 
-   private double localUpdateTxPrepareServiceTime() {
+   protected double localUpdateTxPrepareServiceTime() {
       return csvParser.getAvgParam("LocalUpdateTxPrepareServiceTime");
    }
 
-   private double localUpdateTxCommitServiceTime() {
+   protected double localUpdateTxCommitServiceTime() {
       return csvParser.getAvgParam("LocalUpdateTxCommitServiceTime");
    }
 
-   private double localUpdateTxLocalRollbackServiceTime() {
+   protected double localUpdateTxLocalRollbackServiceTime() {
       return csvParser.getAvgParam("LocalUpdateTxLocalRollbackServiceTime");
    }
 
-   private double localUpdateTxRemoteRollbackServiceTime() {
+   protected double localUpdateTxRemoteRollbackServiceTime() {
       return csvParser.getAvgParam("LocalUpdateTxRemoteRollbackServiceTime");
    }
 
-   private double localReadOnlyTxTotalCpuTime() {
+   protected double localReadOnlyTxTotalCpuTime() {
       return csvParser.getAvgParam("LocalReadOnlyTxLocalServiceTime");
    }
 
-   private double remoteGetServiceTime() {
+   protected double remoteGetServiceTime() {
       return csvParser.getAvgParam("RemoteGetServiceTime");
    }
 
@@ -257,7 +257,7 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
       return csvParser.getAvgParam("GMUClusteredGetCommandServiceTime");
    }
 
-   private double writePercentage() {
+   protected double writePercentage() {
       return csvParser.getAvgParam("PercentageSuccessWriteTransactions");
    }
 
