@@ -2,8 +2,7 @@ package testing;
 
 import CsvOracles.RadargunCsvInputOracle;
 import CsvOracles.params.CsvRgParams;
-import org.apache.log4j.BasicConfigurator;
-
+import org.apache.log4j.PropertyConfigurator;
 
 
 /**
@@ -16,8 +15,7 @@ public class RgTest {
    static String test = "data/infinispan4_cloudtm_2.csv";
 
    public static void main(String[] args) throws Exception {
-      BasicConfigurator.configure();
+      PropertyConfigurator.configure("conf/log4j.properties");
       RadargunCsvInputOracle rg = new RadargunCsvInputOracle(new CsvRgParams(test));
-
    }
 }

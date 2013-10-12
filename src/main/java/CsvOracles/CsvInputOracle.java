@@ -213,7 +213,7 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
    protected abstract double memory();
 
    private double cpus() {
-      return 2;
+      return 1;
    }
 
    protected ReplicationProtocol replicationProtocol() {
