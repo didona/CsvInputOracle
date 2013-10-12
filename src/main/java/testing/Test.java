@@ -6,7 +6,6 @@ import CsvOracles.params.CsvGeoParams;
 import eu.cloudtm.autonomicManager.commons.ForecastParam;
 import eu.cloudtm.autonomicManager.commons.Param;
 import eu.cloudtm.autonomicManager.commons.ReplicationProtocol;
-import org.apache.log4j.PropertyConfigurator;
 import parse.timestamp.LongTimestamp;
 
 import java.io.IOException;
@@ -22,7 +21,7 @@ public class Test {
 
    public static void main(String[] args) throws IOException {
 
-      PropertyConfigurator.configure("conf/log4j.properties");
+      //PropertyConfigurator.configure("conf/log4j.properties");
       LongTimestamp init = new LongTimestamp(1378566999063L);
       LongTimestamp end = new LongTimestamp(1378569856057L);
       CsvGeoParams param = new CsvGeoParams("data/ps_2pc.csv", init, end);

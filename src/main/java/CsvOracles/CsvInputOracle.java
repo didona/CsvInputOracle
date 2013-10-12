@@ -18,8 +18,6 @@ import java.util.Set;
 public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOracleParams> implements InputOracle {
 
    private static final int TPC = 0, PB = 1, TO = 2;
-
-
    protected C csvParser;
    private HashMap<ForecastParam, Object> fMap = new HashMap<ForecastParam, Object>();
    private HashMap<EvaluatedParam, Object> eMap = new HashMap<EvaluatedParam, Object>();
@@ -311,5 +309,13 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
 
    protected abstract C _buildCsvParser(P param) throws IOException;
 
-
+   @Override
+   public String toString() {
+      return "CsvInputOracle{" +
+              "csvParser=" + csvParser +
+              ", fMap=" + fMap +
+              ", eMap=" + eMap +
+              ", pMap=" + pMap +
+              '}';
+   }
 }
