@@ -102,6 +102,8 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
             return (long) replicationDegree();
          case AvgPutsPerWrTransaction:
             return putsPerWrXact();
+         case AvgNumPutsBySuccessfulLocalTx:
+            return putsPerWrXact();
          case AvgPrepareCommandSize:
             return (long) prepareCommandSize();
          case MemoryInfo_used:

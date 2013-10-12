@@ -19,7 +19,7 @@ public class CsvOracleHelper {
       s.add(Param.AvgPutsPerWrTransaction);
       s.add(Param.MemoryInfo_used);
       s.add(Param.AvgGetsPerROTransaction);
-      s.add(Param.AvgPutsPerWrTransaction);
+      s.add(Param.AvgNumPutsBySuccessfulLocalTx);
       s.add(Param.LocalUpdateTxLocalServiceTime);
       s.add(Param.LocalUpdateTxPrepareServiceTime);
       s.add(Param.LocalUpdateTxCommitServiceTime);
