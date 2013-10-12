@@ -45,6 +45,7 @@ public class CsvOracleHelper {
       s.add(Param.AvgRemoteGetRtt);
       s.add(Param.AvgCommitAsync);
       s.add(Param.AvgPrepareRtt);
+      s.add(Param.AvgPrepareCommandSize);
 
       return s;
    }
