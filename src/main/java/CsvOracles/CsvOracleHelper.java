@@ -26,6 +26,7 @@ public class CsvOracleHelper {
       s.add(Param.LocalUpdateTxLocalRollbackServiceTime);
       s.add(Param.LocalUpdateTxRemoteRollbackServiceTime);
       s.add(Param.LocalUpdateTxRemoteRollbackServiceTime);
+      s.add(Param.LocalReadOnlyTxLocalServiceTime);
       s.add(Param.RemoteGetServiceTime);
       s.add(Param.GMUClusteredGetCommandServiceTime);
       s.add(Param.RemoteUpdateTxPrepareServiceTime);

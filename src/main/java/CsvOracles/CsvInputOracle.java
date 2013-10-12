@@ -112,6 +112,8 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
             return (long) getsPerRoXact();
          case AvgGetsPerWrTransaction:
             return (long) getsPerWrXact();
+         case LocalReadOnlyTxLocalServiceTime:
+            return (long) localReadOnlyTxTotalCpuTime(); //RO xact do not have prepare and commit
          case LocalUpdateTxLocalServiceTime:
             return (long) localUpdateTxLocalServiceTime();
          case LocalUpdateTxPrepareServiceTime:
