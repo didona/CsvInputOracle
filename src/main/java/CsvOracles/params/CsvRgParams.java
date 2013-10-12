@@ -25,7 +25,7 @@ package CsvOracles.params;/*
  * @author Diego Didona, didona@gsd.inesc-id.pt
  *         Date: 30/09/13
  */
-public class CsvRgParams extends CsvInputOracleParams{
+public class CsvRgParams extends CsvInputOracleParams {
 
    public CsvRgParams(String path) {
       super(path);

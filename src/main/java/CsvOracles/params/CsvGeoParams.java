@@ -44,4 +44,12 @@ public class CsvGeoParams extends CsvInputOracleParams {
    public final CsvTimestamp getEnd() {
       return end;
    }
+
+   @Override
+   public String toString() {
+      return "CsvGeoParams{" +
+              "init=" + init +
+              ", end=" + end +
+              '}';
+   }
 }

@@ -16,6 +16,7 @@ public class RadargunCsvInputOracle extends CsvInputOracle<Ispn5_2CsvParser, Csv
 
    @Override
    protected Ispn5_2CsvParser _buildCsvParser(CsvRgParams param) throws IOException {
+      log.trace("Ispn5_2CsvParser for " + param.getPath());
       return new Ispn5_2CsvParser(param.getPath());
    }
 

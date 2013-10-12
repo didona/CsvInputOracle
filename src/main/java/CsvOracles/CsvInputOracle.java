@@ -19,15 +19,18 @@ import java.util.Set;
  */
 public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOracleParams> implements InputOracle {
 
+   protected final static Log log = LogFactory.getLog(CsvInputOracle.class);
    private static final int TPC = 0, PB = 1, TO = 2;
-   private final static Log log = LogFactory.getLog(CsvInputOracle.class);
    protected C csvParser;
    private HashMap<ForecastParam, Object> fMap = new HashMap<ForecastParam, Object>();
    private HashMap<EvaluatedParam, Object> eMap = new HashMap<EvaluatedParam, Object>();
    private HashMap<Param, Object> pMap = new HashMap<Param, Object>();
 
    protected CsvInputOracle(P param) throws IOException {
+      log.trace("Building with param " + param);
+      System.out.println("Ciao");
       csvParser = _buildCsvParser(param);
+      log.trace("Built " + csvParser);
       initHash();
    }
 
