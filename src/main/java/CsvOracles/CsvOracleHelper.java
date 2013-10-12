@@ -42,6 +42,9 @@ public class CsvOracleHelper {
       s.add(Param.NumberOfEntries);
       s.add(Param.AvgClusteredGetCommandReplySize);
       s.add(Param.AvgGetsPerWrTransaction);
+      s.add(Param.AvgRemoteGetRtt);
+      s.add(Param.AvgCommitAsync);
+      s.add(Param.AvgPrepareRtt);
 
       return s;
    }
