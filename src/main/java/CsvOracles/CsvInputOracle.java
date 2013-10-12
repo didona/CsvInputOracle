@@ -57,6 +57,18 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
       }
    }
 
+   public HashMap<ForecastParam, Object> getfMap() {
+      return fMap;
+   }
+
+   public HashMap<EvaluatedParam, Object> geteMap() {
+      return eMap;
+   }
+
+   public HashMap<Param, Object> getpMap() {
+      return pMap;
+   }
+
    @Override
    public Object getParam(Param p) {
       return this.pMap.get(p);
