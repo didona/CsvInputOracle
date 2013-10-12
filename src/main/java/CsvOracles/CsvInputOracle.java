@@ -6,6 +6,8 @@ import eu.cloudtm.autonomicManager.commons.ForecastParam;
 import eu.cloudtm.autonomicManager.commons.Param;
 import eu.cloudtm.autonomicManager.commons.ReplicationProtocol;
 import eu.cloudtm.autonomicManager.oracles.InputOracle;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import parse.common.CsvParser;
 
 import java.io.IOException;
@@ -18,6 +20,7 @@ import java.util.Set;
 public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOracleParams> implements InputOracle {
 
    private static final int TPC = 0, PB = 1, TO = 2;
+   private final static Log log = LogFactory.getLog(CsvInputOracle.class);
    protected C csvParser;
    private HashMap<ForecastParam, Object> fMap = new HashMap<ForecastParam, Object>();
    private HashMap<EvaluatedParam, Object> eMap = new HashMap<EvaluatedParam, Object>();
@@ -41,17 +44,24 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
    }
 
    private void initHash() {
+      log.trace("Initing hashMaps");
       Set<Param> p = CsvOracleHelper.csvParams();
+      log.trace("Registered params " + p.toString());
       Set<ForecastParam> f = CsvOracleHelper.csvForecastParams();
+      log.trace("Registered forecastParams " + f.toString());
       Set<EvaluatedParam> e = CsvOracleHelper.csvEvaluatedParams();
+      log.trace("Registered evalParams " + e.toString());
       for (Param pp : p) {
          setParam(pp, _getParam(pp));
+         log.trace("Param  " + pp + " set to " + _getParam(pp));
       }
       for (EvaluatedParam ee : e) {
          setEvaluatedParam(ee, _getEvaluatedParam(ee));
+         log.trace("Eval  " + ee + " set to " + _getEvaluatedParam(ee));
       }
       for (ForecastParam ff : f) {
          setForecastParam(ff, _getForecastParam(ff));
+         log.trace("Forecast  " + ff + " set to " + _getForecastParam(ff));
       }
    }
 
