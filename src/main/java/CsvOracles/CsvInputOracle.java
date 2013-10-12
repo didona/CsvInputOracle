@@ -152,6 +152,12 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
             return (int) numberOfEntries();
          case AvgClusteredGetCommandReplySize:
             return (long) avgClusteredGetCommandReplySize();
+         case AvgCommitAsync:
+            return (long) avgCommitAsync();
+         case AvgPrepareRtt:
+            return (long) avgPrepareRtt();
+         case AvgRemoteGetRtt:
+            return (long) avgRemoteGetRtt();
          default:
             throw new IllegalArgumentException("Param " + param + " is not present");
       }
@@ -190,6 +196,19 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
 
    protected double numNodes() {
       return csvParser.getAvgParam("numNodes");
+   }
+
+   //TODO: do different for PB; TO (waiting times);TPC
+   private double avgPrepareRtt() {
+      return csvParser.getAvgParam("AvgPrepareRtt");
+   }
+
+   private double avgRemoteGetRtt() {
+      return csvParser.getAvgParam("avgRemoteGetRtt");
+   }
+
+   private double avgCommitAsync() {
+      return csvParser.getAvgParam("AvgCommitAsync");
    }
 
    private double replicationDegree() {
