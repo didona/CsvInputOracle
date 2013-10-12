@@ -19,7 +19,7 @@ import java.io.IOException;
 public class Test {
 
 
-   public static void main(String[] args) throws IOException {
+   public static void main(String[] args) throws Exception {
 
       //PropertyConfigurator.configure("conf/log4j.properties");
       LongTimestamp init = new LongTimestamp(1378566999063L);

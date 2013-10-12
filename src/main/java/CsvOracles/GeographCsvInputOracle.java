@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class GeographCsvInputOracle extends CsvInputOracle<GeographCsvParser, CsvGeoParams> {
 
-   public GeographCsvInputOracle(CsvGeoParams param) throws IOException {
+   public GeographCsvInputOracle(CsvGeoParams param) throws Exception {
       super(param);
    }
 

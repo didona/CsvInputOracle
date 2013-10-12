@@ -26,9 +26,8 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
    private HashMap<EvaluatedParam, Object> eMap = new HashMap<EvaluatedParam, Object>();
    private HashMap<Param, Object> pMap = new HashMap<Param, Object>();
 
-   protected CsvInputOracle(P param) throws IOException {
+   protected CsvInputOracle(P param) throws Exception {
       log.trace("Building with param " + param);
-      System.out.println("Ciao");
       csvParser = _buildCsvParser(param);
       log.trace("Built " + csvParser);
       initHash();
@@ -225,7 +224,9 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
          return ReplicationProtocol.PB;
       if (rp == TO)
          return ReplicationProtocol.TO;
-      throw new IllegalArgumentException("Replication protocol is " + rp + " !! " + TPC + " = TPC; " + PB + " = PB; " + TO + "+ = TO");
+      //throw new IllegalArgumentException("Replication protocol is " + rp + " !! " + TPC + " = TPC; " + PB + " = PB; " + TO + "+ = TO");
+      log.error("Replication protocol is " + rp + " !! " + TPC + " = TPC; " + PB + " = PB; " + TO + "+ = TO" + " Returning " + TPC);
+      return ReplicationProtocol.TWOPC;
    }
 
    protected double getsPerRoXact() {

@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class RadargunCsvInputOracle extends CsvInputOracle<Ispn5_2CsvParser, CsvRgParams> {
 
-   public RadargunCsvInputOracle(CsvRgParams param) throws IOException {
+   public RadargunCsvInputOracle(CsvRgParams param) throws Exception {
       super(param);
    }
 
@@ -35,6 +35,10 @@ public class RadargunCsvInputOracle extends CsvInputOracle<Ispn5_2CsvParser, Csv
 
    protected double numberOfEntries() {
       return csvParser.numKeys();
+   }
+
+   protected final double numNodes() {
+      return csvParser.getNumNodes();
    }
    /*
    protected ReplicationProtocol replicationProtocol() {
