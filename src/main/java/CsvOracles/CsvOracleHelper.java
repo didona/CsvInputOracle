@@ -36,7 +36,7 @@ public class CsvOracleHelper {
       s.add(Param.PercentageSuccessWriteTransactions);
       s.add(Param.PercentageWriteTransactions);
       s.add(Param.AvgLocalGetTime);
-      s.add(Param.LocalUpdateTxPrepareResponseTime);
+      //s.add(Param.LocalUpdateTxPrepareResponseTime);
       s.add(Param.AverageWriteTime);
       s.add(Param.AvgTxArrivalRate);
       s.add(Param.AvgNTCBTime);
