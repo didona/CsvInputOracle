@@ -64,6 +64,7 @@ public class CsvOracleHelper {
       s.add(EvaluatedParam.ACF);
       s.add(EvaluatedParam.CORE_PER_CPU);
       s.add(EvaluatedParam.MAX_ACTIVE_THREADS);
+      s.add(EvaluatedParam.ISOLATION_LEVEL);
       return s;
    }
 

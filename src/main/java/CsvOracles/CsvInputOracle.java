@@ -1,10 +1,7 @@
 package CsvOracles;
 
 import CsvOracles.params.CsvInputOracleParams;
-import eu.cloudtm.autonomicManager.commons.EvaluatedParam;
-import eu.cloudtm.autonomicManager.commons.ForecastParam;
-import eu.cloudtm.autonomicManager.commons.Param;
-import eu.cloudtm.autonomicManager.commons.ReplicationProtocol;
+import eu.cloudtm.autonomicManager.commons.*;
 import eu.cloudtm.autonomicManager.oracles.InputOracle;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -176,6 +173,8 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
             return acf();
          case CORE_PER_CPU:
             return (int) cpus();
+         case ISOLATION_LEVEL:
+            return isolationLevel();
          default:
             throw new IllegalArgumentException("Param " + evaluatedParam + " is not present");
       }
@@ -342,6 +341,10 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
 
    private double avgClusteredGetCommandReplySize() {
       return csvParser.getAvgParam("AvgClusteredGetCommandReplySize");
+   }
+
+   private IsolationLevel isolationLevel() {
+      return IsolationLevel.RR;
    }
 
    protected abstract C _buildCsvParser(P param) throws IOException;
