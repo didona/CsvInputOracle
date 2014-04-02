@@ -1,7 +1,11 @@
 package CsvOracles;
 
 import CsvOracles.params.CsvInputOracleParams;
-import eu.cloudtm.autonomicManager.commons.*;
+import eu.cloudtm.autonomicManager.commons.EvaluatedParam;
+import eu.cloudtm.autonomicManager.commons.ForecastParam;
+import eu.cloudtm.autonomicManager.commons.IsolationLevel;
+import eu.cloudtm.autonomicManager.commons.Param;
+import eu.cloudtm.autonomicManager.commons.ReplicationProtocol;
 import eu.cloudtm.autonomicManager.oracles.InputOracle;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -229,6 +233,27 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
    }
 
    private double acf() {
+      C parser = csvParser;
+      if (parser.getPath().contains("ZIPF")) {
+         if (numberOfEntries() == 100000)
+            return 0.000307;
+         if (numberOfEntries() == 500000) {
+            if (parser.getPath().contains(".4"))
+               return 3.4e-6;
+            if (parser.getPath().contains(".7"))
+               return 1.15e-4;
+            if (parser.getPath().contains(".5"))
+               return 6.98e-6;
+            if (parser.getPath().contains(".6"))
+               return 2.4e-5;
+         }
+         if (numberOfEntries() == 200000)
+            return 2e-4;
+      }
+
+      if (parser.getPath().contains("HOTSPOT"))
+         return 1.0D / 2500D;
+
       return 1.0D / numberOfEntries();
    }
 
@@ -352,10 +377,10 @@ public abstract class CsvInputOracle<C extends CsvParser, P extends CsvInputOrac
    @Override
    public String toString() {
       return "CsvInputOracle{" +
-              "csvParser=" + csvParser +
-              ", fMap=" + fMap +
-              ", eMap=" + eMap +
-              ", pMap=" + pMap +
-              '}';
+            "csvParser=" + csvParser +
+            ", fMap=" + fMap +
+            ", eMap=" + eMap +
+            ", pMap=" + pMap +
+            '}';
    }
 }
